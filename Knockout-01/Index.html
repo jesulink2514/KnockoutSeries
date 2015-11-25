@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Content/estilos.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-header">Probando Knockout</h1>
+        <div class="row">
+            <div class="col-lg-6">
+                <h4>Developers</h4>
+                <div class="well">
+                    <div class="form-group" data-bind="with:developer">
+                        <label class="control-label">Ingrese el nombre:</label>
+                        <input type="text" data-bind="textInput:name" class="form-control input-sm" />
+                    </div>
+
+                    <div class="form-group" data-bind="with:developer">
+                        <label class="control-label">Ingrese el email:</label>
+                        <input type="email" data-bind="textInput:email" class="form-control input-sm" />
+                    </div>
+
+                    <div class="form-group">
+                        <a class="btn btn-sm btn-primary" data-bind="click:add">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Agregar un desarrollador
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <ul class="developers list-group" data-bind="foreach:developers">
+                        <li class="list-group-item row">
+                            <div class="profile-picture col-lg-3">
+                                <img class="img-responsive img-circle" data-bind="attr:{src:profile}" alt="foto" />
+                            </div>
+                            <div class="col-lg-8">
+                                <h4 class="list-group-item-heading" data-bind="text:name"></h4>
+                                <p class="list-group-item-text" data-bind="text:email"></p>
+                                <p class="list-group-button">
+                                    <a data-bind="click:$root.eliminar" class="btn btn-sm btn-danger">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                        Eliminar este registro
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h4>Tareas</h4>
+                <div class="well">
+                    <div class="form-group" data-bind="with:task">
+                        <label class="control-label">Ingrese la tarea:</label>
+                        <input type="text" data-bind="textInput:name" class="form-control input-sm" />
+                    </div>
+
+                    <div class="form-group" data-bind="with:task">
+                        <label class="control-label">Elija la prioridad:</label>
+                        <select class="input-sm form-control" data-bind="options: $root.priorities,
+                                optionsText: 'text',
+                                optionsValue: 'value',
+                                value:priority"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <a class="btn btn-sm btn-primary" data-bind="click:addTask">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Agregar una tarea
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <ul class="tasks list-group" data-bind="foreach:pendientes">
+                        <li class="list-group-item row">
+                            <input type="checkbox" data-bind="checked:done" />                            
+                            <h4 class="list-group-item-heading task-name" data-bind="text:name"></h4>
+                            <div class="priority" data-bind="css:priority"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="Scripts/md5.js"></script>
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/knockout-3.4.0.debug.js"></script>
+    <script src="app/mainviewmodel.js"></script>
+    <script type="text/javascript" async>
+        var vm = new mainViewModel();
+        ko.applyBindings(vm);
+    </script>
+</body>
+</html>
